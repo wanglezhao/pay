@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.guweibit.pay.mapper.AlipayMapper">
+	
+	<!-- 插入用户数据 -->
+	<!-- Integer insert(AlipayOrderInformation ali) -->
+	<insert id="insert"
+		parameterType="com.guweibit.pay.entity.AlipayOrderInformation">
+		INSERT INTO alipay_order_information (
+			out_trade_no,
+			subject,
+			total_amount,
+			body
+		) VALUES (
+			#{outTradeNo},
+			#{subject},
+			#{totalAmount},
+			#{body}
+		)
+	</insert>
+	
+	<!-- 修改订单状态 -->
+	<!-- Integer updata(@Param("total_amount") Integer total_amount, 
+		    @Param("status") Integer status); -->
+	<update id="updata">
+		UPDATE 
+			alipay_order_information 
+		SET 
+			status=#{status}
+		WHERE 
+			total_amount=#{total_amount}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.guweibit.pay.mapper.CommodityMapper">
+	<!-- 根据商品名查询商品数据 -->
+	<!-- User getUserByUsername(String username) -->
+	<select id="getCommodityByName"
+		resultType="com.guweibit.pay.entity.Commodity">
+		SELECT 
+			id,
+			name,
+			price
+		FROM 
+			commodity_list 
+		WHERE 
+			name=#{name}
+	</select>
+	
+
+</mapper>
+
+
+
+
+
+
+
+
