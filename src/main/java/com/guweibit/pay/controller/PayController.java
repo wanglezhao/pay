@@ -21,7 +21,7 @@ public class PayController {
 	public String payIndex() {
 		return "hello";
 	}
-	//计算总价并生成订单信息
+	//计算总价并生成订单信息并进行支付路由
 	@RequestMapping("/pay.do")
 	public String pay(HttpServletRequest request) {
 		HttpSession session=request.getSession();
@@ -37,7 +37,15 @@ public class PayController {
 		session.setAttribute("WIDtotal_amount", ali.getTotalAmount());
 		request.setAttribute("WIDsubject", "商品");
 		request.setAttribute("WIDbody", "这是一个商品");
-		return "index";
+		//支付路由，多种支付方式进行费率比较，选择最省钱的通道进行支付
+		//本次设计只接入了支付宝沙箱支付，假设有多种支付通道则(之后有引入别的通道的话将功能放在业务层)：
+		double alipay=0.9,weixinpay=0.95;
+		if(alipay<weixinpay) {
+			return "index";
+		}else {
+			return "index2";
+		}
+		
 	}
 	
 	@RequestMapping("/return_url.do")

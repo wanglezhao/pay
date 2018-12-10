@@ -20,6 +20,7 @@ import com.guweibit.pay.entity.Commodity;
 import com.guweibit.pay.mapper.AlipayMapper;
 import com.guweibit.pay.mapper.CommodityMapper;
 import com.guweibit.pay.service.IPayService;
+import com.guweibit.pay.service.ex.NameNotFoundException;
 @Service("payService")
 public class PayService implements IPayService{
 	@Autowired
@@ -37,19 +38,26 @@ public class PayService implements IPayService{
 	}
 	
 	//计算总价并生成订单信息存入数据库中
-	public AlipayOrderInformation getPayInfo(HttpServletRequest request) {
+	public AlipayOrderInformation getPayInfo (HttpServletRequest request) {
 		String name=request.getParameter("name");
 		Integer number=Integer.parseInt(request.getParameter("number"));
 		Commodity commodity=getCommodityInfoByName(name);
-		String TotalAmount=Integer.toString(commodity.getPrice()*number)+".00";
-		request.getSession();
-		//生成订单号
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		System.out.println(df.format(new Date()));
-		AlipayOrderInformation ali=new AlipayOrderInformation(Double.parseDouble(df.format(new Date())), "商品", TotalAmount, "这是一个商品");
-		//将订单信息插入数据库
-		insertInfo(ali);
-		return ali;
+		if(commodity!=null) {
+			String TotalAmount=Integer.toString(commodity.getPrice()*number)+".00";
+			request.getSession();
+			//生成订单号
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+			System.out.println(df.format(new Date()));
+			AlipayOrderInformation ali=new AlipayOrderInformation(Double.parseDouble(df.format(new Date())), "商品", TotalAmount, "这是一个商品");
+			//将订单信息插入数据库
+			insertInfo(ali);
+			return ali;
+		}else {
+			// 错误：抛出PasswordNotMatchException
+			throw new NameNotFoundException("该商品不存在！");
+		}
+		
+		
 	}
 	//获取支付宝回复信息
 	public String getAlipayInfo(HttpServletRequest request) throws UnsupportedEncodingException, AlipayApiException {

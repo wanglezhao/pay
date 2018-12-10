@@ -3,12 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+body{
+	text-align: center;
+}
+.div{
+	margin:0 auto; 
+	margin-top:50px;
+	width:400px; 
+	height:200px; 
+	background-color: #97FFFF;
+}
+.ip1{
+	margin-top: 50px;
+	
+}
+.ip2{
+	margin-top: 10px;
+	
+}
+.span1{
+	margin-left: -32px;
+}
+</style>
 </head>
-<body>
+<body >
+	<h1>本商城暂时只有旺仔小馒头、旺仔牛奶、旺仔雪饼</h1>
 	<form action="/alipay/pay/pay.do">
-		<input type="text" name="name">
-		<input type="text" name="number">
-		<input type="submit" value="提交">
+		<div class="div">
+		   	<span class="span1">商品名</span><input class="ip1" type="text" name="name"><br>
+			商品数量<!-- <input class="ip2" type="text" name="number"> --><input class="ip2" name="number" type="text" value="1" maxlength="3"  onKeyUp="value=(parseInt((value=value.replace(/\D/g,''))==''?'1':value,10))" />
+			<input type="submit" value="购买">
+		</div>
 	</form>
 </body>
 </html>

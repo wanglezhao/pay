@@ -27,10 +27,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvurY8gbnOZ9K/E+2cbITfg3n0/pMFBFoTWEytuKILa90Hn7/8UQBnE42s0+JOdZ1o3QYiGewb6vZScVeCP7Q1MkiaIMR7qBhZAJwzT9ZUqUi1JBtDM+BUwppvZoIRW7mGwWxZPEHP1N+CjFIDsczk+p8LgG00gaRsmaWYNI2qbWlacGonTecwgCra80DzK901OqXIT+/aFv6pbP+t4rMAxBoATusY8rwFVohFA3Z5MofDOjfGpzchQzFQtEoJ8euc9aJWZQUS0oT/FN869AUOth9b5Q8Hpc75LEqNbqRfDDEKoBe+mFLcby5kab2sf2FzR8NgDoJ5tNEiZs7FiX9aQIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://fmjkaa.natappfree.cc/alipay/notify_url.jsp";
+	public static String notify_url = "http://fx4v6b.natappfree.cc/alipay/notify_url.jsp";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://fmjkaa.natappfree.cc/alipay/pay/return_url.do";
+	public static String return_url = "http://fx4v6b.natappfree.cc/alipay/pay/return_url.do";
 
 	// 签名方式
 	public static String sign_type = "RSA2";
