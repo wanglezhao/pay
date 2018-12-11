@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,23 +39,26 @@ public class PayService implements IPayService{
 	}
 	
 	//计算总价并生成订单信息存入数据库中
-	public AlipayOrderInformation getPayInfo (HttpServletRequest request) {
+	public void getPayInfo (HttpServletRequest request) {
 		String name=request.getParameter("name");
 		Integer number=Integer.parseInt(request.getParameter("number"));
+		HttpSession session=request.getSession();
 		Commodity commodity=getCommodityInfoByName(name);
 		if(commodity!=null) {
 			String TotalAmount=Integer.toString(commodity.getPrice()*number)+".00";
-			request.getSession();
 			//生成订单号
 			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 			System.out.println(df.format(new Date()));
 			AlipayOrderInformation ali=new AlipayOrderInformation(Double.parseDouble(df.format(new Date())), "商品", TotalAmount, "这是一个商品");
+			session.setAttribute("WIDout_trade_no", ali.getOutTradeNo());
+			session.setAttribute("WIDtotal_amount", ali.getTotalAmount());
+			session.setAttribute("WIDsubject", "商品");
+			session.setAttribute("WIDbody", "这是一个商品");
 			//将订单信息插入数据库
 			insertInfo(ali);
-			return ali;
 		}else {
 			// 错误：抛出PasswordNotMatchException
-			throw new NameNotFoundException("该商品不存在！");
+			throw new NameNotFoundException("您所需的"+name+"暂时没有，敬请期待商城下次更新！");
 		}
 		
 		
